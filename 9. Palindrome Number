@@ -1,0 +1,46 @@
+9. Palindrome Number
+
+
+Given an integer x, return true if x is a 
+palindrome
+, and false otherwise.
+
+ 
+
+Example 1:
+
+Input: x = 121
+Output: true
+Explanation: 121 reads as 121 from left to right and from right to left
+
+Constraints:
+
+-231 <= x <= 231 - 1
+
+class Solution {
+    public boolean isPalindrome(int x) {
+         // Negative numbers and numbers ending in 0 (except 0 itself) are not palindromes
+        if (x < 0 || (x % 10 == 0 && x != 0)) {
+            return false;
+        }
+
+        int reversed = 0;
+        int original = x;
+
+        // Reverse the integer
+        while (x > 0) {
+            int digit = x % 10;
+            x /= 10;
+
+            // Check for overflow
+            if (reversed > (Integer.MAX_VALUE - digit) / 10) {
+                return false;
+            }
+
+            reversed = reversed * 10 + digit;
+        }
+
+        // Check if the reversed integer matches the original
+        return reversed == original;
+    }
+}
